@@ -4,7 +4,7 @@
 #include "common.h"
 #include "graph.h"
 
-bool bellman_ford(std::vector<std::vector<std::pair<int,ll>>> &G, int s,std::vector<ll> &dist,std::vector<int> &pred){
+bool bellman_ford(std::vector<std::vector<std::pair<int,ll>>> &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     // Initializes distance and predecessor vectors
     for(unsigned int i = 0; i < dist.size(); i++){
         dist[i] = inf;

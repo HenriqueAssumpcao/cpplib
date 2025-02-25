@@ -8,7 +8,7 @@
 // DFS with finish time (recursive!)
 int dfs_time;
 
-void dfs_visit(std::vector<std::vector<std::pair<int,ll>>> &G,int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish){
+void dfs_visit(std::vector<std::vector<std::pair<int,ll>>> &G,const int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish){
     dfs_time++;
     dist[u] = dfs_time;
     color[u] = 1;
@@ -42,7 +42,7 @@ void dfs(std::vector<std::vector<std::pair<int,ll>>> &G,std::vector<ll> &dist,st
 }
 
 // Iterative DFS
-void dfs(std::vector<std::vector<std::pair<int,ll>>> &G, int s,std::vector<ll> &dist,std::vector<int> &pred){
+void dfs(std::vector<std::vector<std::pair<int,ll>>> &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     std::vector<int> color(G.size());
     for(unsigned int i = 0; i < dist.size(); i++){
         dist[i] = inf;

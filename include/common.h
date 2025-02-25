@@ -16,6 +16,6 @@ void print_vector(std::vector<T> &vec){
     std::cout << std::endl;
 }
 
-void print_path(int s, int v,std::vector<int> &pred, bool arrow = false);
+void print_path(const int s, int v,std::vector<int> &pred, bool arrow = false);
 
 #endif 
