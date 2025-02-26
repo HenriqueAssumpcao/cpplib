@@ -8,14 +8,40 @@
 #include <iostream>
 #include <vector>
 
+/*
+O(n^2)
+*/
 template <typename T>
-void print_vector(std::vector<T> &vec){
-    for(unsigned int i =0; i < vec.size(); i++){
-        std::cout << vec[i] << " ";
+void print_matrix(const std::vector<std::vector<T>> &M){
+    std::cout << "[";
+    for(unsigned int i = 0; i < M.size(); i++){
+        std::cout << "[";
+        for(unsigned int j = 0; j < M.size()-1; j++){
+            std::cout << M[i][j] << ",";
+        }
+        std::cout << M[i][M.size()-1] << "]";
+        if(i < M.size()-1){
+            std::cout << std::endl;
+        }
     }
-    std::cout << std::endl;
+    std::cout << "]" << std::endl;
 }
 
-void print_path(const int s, int v,std::vector<int> &pred, bool arrow = false);
+/*
+O(n)
+*/
+template <typename T>
+void print_matrix(const std::vector<T> &v){
+    std::cout << "[";
+    for(unsigned int i = 0; i < v.size()-1; i++){
+        std::cout << v[i] << ",";
+    }
+    std::cout << v[v.size()-1] << "]" << std::endl;
+}
 
-#endif 
+/*
+O(n)
+*/
+void print_path(const int s, const int v,const std::vector<int> &pred, const bool arrow = false);
+
+#endif // COMMON

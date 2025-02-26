@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-void print_path(const int s, int v,std::vector<int> &pred, bool arrow){
+void print_path(const int s,const int v,const std::vector<int> &pred, const bool arrow){
     if(s == v){
         std::cout << s << " --> ";
     }

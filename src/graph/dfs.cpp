@@ -1,6 +1,7 @@
-#include <vector>
-#include <stack>
 #include <limits>
+#include <stack>
+#include <vector>
+
 
 #include "common.h"
 #include "graph.h"
@@ -8,7 +9,7 @@
 // DFS with finish time (recursive!)
 int dfs_time;
 
-void dfs_visit(std::vector<std::vector<std::pair<int,ll>>> &G,const int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish){
+void dfs_visit(const wgraph &G,const int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish){
     dfs_time++;
     dist[u] = dfs_time;
     color[u] = 1;
@@ -23,7 +24,7 @@ void dfs_visit(std::vector<std::vector<std::pair<int,ll>>> &G,const int u,std::v
     color[u] = 2;
 }
 
-void dfs(std::vector<std::vector<std::pair<int,ll>>> &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<int> &finish){
+void dfs(const wgraph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<int> &finish){
     std::vector<int> color(G.size());
     for(unsigned int i = 0; i < dist.size(); i++){
         dist[i] = inf;
@@ -42,7 +43,7 @@ void dfs(std::vector<std::vector<std::pair<int,ll>>> &G,std::vector<ll> &dist,st
 }
 
 // Iterative DFS
-void dfs(std::vector<std::vector<std::pair<int,ll>>> &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
+void dfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     std::vector<int> color(G.size());
     for(unsigned int i = 0; i < dist.size(); i++){
         dist[i] = inf;

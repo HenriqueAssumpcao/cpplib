@@ -6,7 +6,7 @@
 #include "graph.h"
 
 
-void dijkstra(std::vector<std::vector<std::pair<int,ll>>> &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
+void dijkstra(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     // Initializes distance and predecessor vectors
     for(unsigned int i = 0; i < dist.size(); i++){
         dist[i] = inf;
@@ -22,7 +22,7 @@ void dijkstra(std::vector<std::vector<std::pair<int,ll>>> &G, const int s,std::v
         auto [curr_dist,u] = pq.top();
         pq.pop();
         for(auto [v,w]:G[u]){
-            if(dist[v] > dist[u] + w){
+            if(dist[u] != inf and dist[v] > dist[u] + w){
                 dist[v] = dist[u] + w;
                 pred[v] = u;
                 pq.emplace(-dist[v],v);

@@ -1,12 +1,11 @@
-
+#include <limits>
 #include <vector>
 #include <queue>
-#include <limits>
 
 #include "common.h"
 #include "graph.h"
 
-void bfs(std::vector<std::vector<std::pair<int,ll>>> &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
+void bfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     /*
     BFS search w.r.t. to a fixed node s on input graph G. dist is a vector of distances (ignoring weights), and pred is a vector of predecessors.
     */
