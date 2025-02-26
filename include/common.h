@@ -3,6 +3,7 @@
 #ifndef COMMON
 #define COMMON
 
+#define ll long long
 #define inf std::numeric_limits<ll>::max()
 
 #include <iostream>
