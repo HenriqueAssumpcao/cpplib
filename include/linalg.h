@@ -2,8 +2,8 @@
 #define LINALG
 
 
-#define intmatrix std::vector<std::vector<ll>>
-#define llmatrix std::vector<std::vector<ll>>
+#define intmatrix std::vector<std::vector<int>>
+#define llmatrix std::vector<std::vector<long long>>
 #define fmatrix std::vector<std::vector<float>>
 #define dmatrix std::vector<std::vector<double>>
 
