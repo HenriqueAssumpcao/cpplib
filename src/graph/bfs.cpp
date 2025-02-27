@@ -2,8 +2,8 @@
 #include <vector>
 #include <queue>
 
-#include "common.h"
-#include "graph.h"
+#include "common.hpp"
+#include "graph/search.hpp"
 
 void bfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     /*

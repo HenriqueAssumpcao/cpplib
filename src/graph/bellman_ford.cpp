@@ -1,8 +1,8 @@
 #include <limits>
 #include <vector>
 
-#include "common.h"
-#include "graph.h"
+#include "common.hpp"
+#include "graph/shortest_path.hpp"
 
 bool bellman_ford(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     // Initializes distance and predecessor vectors

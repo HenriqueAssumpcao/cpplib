@@ -4,9 +4,10 @@
 #include <cmath>
 #include <list>
 
-#include "common.h"
-#include "graph.h"
-#include "linalg.h"
+#include "common.hpp"
+#include "graph.hpp"
+#include "linalg.hpp"
+#include "printing.hpp"
 
 int main(){
 

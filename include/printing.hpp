@@ -1,10 +1,7 @@
 #pragma once
 
-#ifndef COMMON
-#define COMMON
-
-#define ll long long
-#define inf std::numeric_limits<ll>::max()
+#ifndef PRINTING
+#define PRINTING
 
 #include <iostream>
 #include <vector>
@@ -45,4 +42,5 @@ O(n)
 */
 void print_path(const int s, const int v,const std::vector<int> &pred, const bool arrow = false);
 
-#endif // COMMON
+
+#endif // PRINTING

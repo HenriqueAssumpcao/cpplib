@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include "common.h"
+#include "common.hpp"
 
 void print_path(const int s,const int v,const std::vector<int> &pred, const bool arrow){
     if(s == v){

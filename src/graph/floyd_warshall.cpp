@@ -3,9 +3,8 @@
 #include <limits>
 #include <vector>
 
-#include "common.h"
-#include "graph.h"
-#include "linalg.h"
+#include "common.hpp"
+#include "graph/shortest_path.hpp"
 
 llmatrix floyd_warshall(const wgraph &G){
     // Initialize distance matrix as weight matrix

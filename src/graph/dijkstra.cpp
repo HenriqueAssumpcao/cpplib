@@ -2,8 +2,8 @@
 #include <queue>
 #include <limits>
 
-#include "common.h"
-#include "graph.h"
+#include "common.hpp"
+#include "graph/shortest_path.hpp"
 
 
 void dijkstra(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){

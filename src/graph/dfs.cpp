@@ -3,8 +3,8 @@
 #include <vector>
 
 
-#include "common.h"
-#include "graph.h"
+#include "common.hpp"
+#include "graph/search.hpp"
 
 // DFS with finish time (recursive!)
 int dfs_time;
