@@ -12,6 +12,7 @@
 /*
 O(V+E)
 */
+void bfs(const graph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred);
 void bfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred);
 
 // DFS
@@ -19,17 +20,20 @@ void bfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pr
 /*
 O(V+E)
 */
+void dfs_visit(const graph &G,const int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish);
 void dfs_visit(const wgraph &G,const int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish);
 
 /*
 O(V+E)
 */
+void dfs(const graph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<int> &finish);
 void dfs(const wgraph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<int> &finish);
 
 /// Iterative
 /*
 O(V+E)
 */
+void dfs(const graph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred);
 void dfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred);
 
 

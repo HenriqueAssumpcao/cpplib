@@ -9,11 +9,44 @@
 // DFS with finish time (recursive!)
 int dfs_time;
 
+void dfs_visit(const graph &G,const int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish){
+    dfs_time++;
+    dist[u] = dfs_time;
+    color[u] = 1;
+    for(auto v : G[u]){
+        if(color[v] == 0){
+            pred[v] = u;
+            dfs_visit(G,v,dist,pred,color,finish);
+        }
+    }
+    dfs_time++;
+    finish[u] = dfs_time;
+    color[u] = 2;
+}
+
+void dfs(const graph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<int> &finish){
+    std::vector<int> color(G.size());
+    for(unsigned int i = 0; i < dist.size(); i++){
+        dist[i] = inf;
+        pred[i] = -1;
+        color[i] = 0;
+    }
+
+    std::vector<int> times(G.size());
+    dfs_time = 0;
+
+    for(unsigned int u = 0; u < G.size(); u++){
+        if(color[u] == 0){
+            dfs_visit(G,u,dist,pred,color,finish);
+        }
+    }
+}
+
 void dfs_visit(const wgraph &G,const int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish){
     dfs_time++;
     dist[u] = dfs_time;
     color[u] = 1;
-    for(auto [v,_] : G[u]){
+    for(auto [v,w] : G[u]){
         if(color[v] == 0){
             pred[v] = u;
             dfs_visit(G,v,dist,pred,color,finish);
@@ -43,6 +76,35 @@ void dfs(const wgraph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vect
 }
 
 // Iterative DFS
+void dfs(const graph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
+    std::vector<int> color(G.size());
+    for(unsigned int i = 0; i < dist.size(); i++){
+        dist[i] = inf;
+        pred[i] = -1;
+        color[i] = 0;
+    }
+    dist[s] = 0;
+    color[s] = 1;
+
+    std::stack<int> st;
+
+    st.push(s);
+
+    int u;
+    while(st.size()){
+        u = st.top();
+        st.pop();
+        for(auto v : G[u]){
+            if(color[v] == 0){
+                color[v] = 1;
+                pred[v] = u;
+                dist[v] = dist[u] + 1;
+                st.push(v);
+            }
+        }
+    }
+}
+
 void dfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     std::vector<int> color(G.size());
     for(unsigned int i = 0; i < dist.size(); i++){
@@ -61,7 +123,7 @@ void dfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pr
     while(st.size()){
         u = st.top();
         st.pop();
-        for(auto [v,_] : G[u]){
+        for(auto [v,w] : G[u]){
             if(color[v] == 0){
                 color[v] = 1;
                 pred[v] = u;
@@ -71,3 +133,4 @@ void dfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pr
         }
     }
 }
+

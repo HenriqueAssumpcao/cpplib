@@ -26,6 +26,7 @@ void dijkstra(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int
 /*
 O(V^3)
 */
+llmatrix floyd_warshall(const graph &G);
 llmatrix floyd_warshall(const wgraph &G);
 
 
