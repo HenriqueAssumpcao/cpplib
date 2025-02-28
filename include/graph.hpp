@@ -3,7 +3,10 @@
 #ifndef GRAPH
 #define GRAPH
 
+#include "graph/transform.hpp"
 #include "graph/search.hpp"
 #include "graph/shortest_path.hpp"
+#include "graph/matrix.hpp"
+#include "graph/utils.hpp"
 
 #endif // GRAPH

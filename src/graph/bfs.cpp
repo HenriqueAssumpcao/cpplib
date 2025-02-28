@@ -5,14 +5,14 @@
 #include "common.hpp"
 #include "graph/search.hpp"
 
-
-void bfs(const graph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
-    /*
-    BFS search w.r.t. to a fixed node s on input graph G. dist is a vector of distances (ignoring weights), and pred is a vector of predecessors.
-    */
+/*
+BFS search w.r.t. to a fixed node s on input graph G. dist is a vector of distances (ignoring weights), and pred is a vector of predecessors.
+Expects both dist and pred arrays to have size equal to the number of nodes.
+*/
+void bfs(const graph &G, const unsigned s,std::vector<ll> &dist,std::vector<int> &pred){
     // Initializes the distance,predecessor and color vectors
     std::vector<int> color(G.size());
-    for(unsigned int i = 0; i < dist.size(); i++){
+    for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = inf;
         pred[i] = -1;
         color[i] = 0;
@@ -21,11 +21,11 @@ void bfs(const graph &G, const int s,std::vector<ll> &dist,std::vector<int> &pre
     color[s] = 1;
     
     // Queue
-    std::queue<int> q;
+    std::queue<unsigned> q;
     q.push(s);
 
     // Main loop: for each neighbor of current queue front, explore it if its color is 0
-    int u;
+    unsigned u;
     while(q.size()){
         u = q.front();
         q.pop();
@@ -40,14 +40,14 @@ void bfs(const graph &G, const int s,std::vector<ll> &dist,std::vector<int> &pre
     }
 }
 
-
-void bfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
-    /*
-    BFS search w.r.t. to a fixed node s on input graph G. dist is a vector of distances (ignoring weights), and pred is a vector of predecessors.
-    */
+/*
+BFS search w.r.t. to a fixed node s on input graph G. dist is a vector of distances (ignoring weights), and pred is a vector of predecessors.
+Expects both dist and pred arrays to have size equal to the number of nodes.
+*/
+void bfs(const wgraph &G, const unsigned s,std::vector<ll> &dist,std::vector<int> &pred){
     // Initializes the distance,predecessor and color vectors
-    std::vector<int> color(G.size());
-    for(unsigned int i = 0; i < dist.size(); i++){
+    std::vector<unsigned> color(G.size());
+    for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = inf;
         pred[i] = -1;
         color[i] = 0;
@@ -56,11 +56,11 @@ void bfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pr
     color[s] = 1;
     
     // Queue
-    std::queue<int> q;
+    std::queue<unsigned> q;
     q.push(s);
 
     // Main loop: for each neighbor of current queue front, explore it if its color is 0
-    int u;
+    unsigned u;
     while(q.size()){
         u = q.front();
         q.pop();

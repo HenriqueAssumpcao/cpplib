@@ -15,9 +15,10 @@
 #define fmatrix std::vector<std::vector<float>>
 #define dmatrix std::vector<std::vector<double>>
 
-#define graph std::vector<std::list<int>> // type of a weightless graph
-#define wgraph std::vector<std::list<std::pair<int,ll>>> // type of a weighted graph
+#define graph std::vector<std::list<unsigned>> // type of a weightless graph
+#define wgraph std::vector<std::list<std::pair<unsigned,ll>>> // type of a weighted graph
 
 
 
 #endif // COMMON
+

@@ -9,7 +9,7 @@
 // DFS with finish time (recursive!)
 int dfs_time;
 
-void dfs_visit(const graph &G,const int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish){
+void dfs_visit(const graph &G,const unsigned u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<unsigned> &color,std::vector<unsigned> &finish){
     dfs_time++;
     dist[u] = dfs_time;
     color[u] = 1;
@@ -24,25 +24,25 @@ void dfs_visit(const graph &G,const int u,std::vector<ll> &dist,std::vector<int>
     color[u] = 2;
 }
 
-void dfs(const graph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<int> &finish){
-    std::vector<int> color(G.size());
-    for(unsigned int i = 0; i < dist.size(); i++){
+void dfs(const graph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<unsigned> &finish){
+    std::vector<unsigned> color(G.size());
+    for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = inf;
         pred[i] = -1;
         color[i] = 0;
     }
 
-    std::vector<int> times(G.size());
+    std::vector<unsigned> times(G.size());
     dfs_time = 0;
 
-    for(unsigned int u = 0; u < G.size(); u++){
+    for(unsigned u = 0; u < G.size(); u++){
         if(color[u] == 0){
             dfs_visit(G,u,dist,pred,color,finish);
         }
     }
 }
 
-void dfs_visit(const wgraph &G,const int u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<int> &color,std::vector<int> &finish){
+void dfs_visit(const wgraph &G,const unsigned u,std::vector<ll> &dist,std::vector<int> &pred,std::vector<unsigned> &color,std::vector<unsigned> &finish){
     dfs_time++;
     dist[u] = dfs_time;
     color[u] = 1;
@@ -57,18 +57,18 @@ void dfs_visit(const wgraph &G,const int u,std::vector<ll> &dist,std::vector<int
     color[u] = 2;
 }
 
-void dfs(const wgraph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<int> &finish){
-    std::vector<int> color(G.size());
-    for(unsigned int i = 0; i < dist.size(); i++){
+void dfs(const wgraph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<unsigned> &finish){
+    std::vector<unsigned> color(G.size());
+    for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = inf;
         pred[i] = -1;
         color[i] = 0;
     }
 
-    std::vector<int> times(G.size());
+    std::vector<unsigned> times(G.size());
     dfs_time = 0;
 
-    for(unsigned int u = 0; u < G.size(); u++){
+    for(unsigned u = 0; u < G.size(); u++){
         if(color[u] == 0){
             dfs_visit(G,u,dist,pred,color,finish);
         }
@@ -76,9 +76,9 @@ void dfs(const wgraph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vect
 }
 
 // Iterative DFS
-void dfs(const graph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
-    std::vector<int> color(G.size());
-    for(unsigned int i = 0; i < dist.size(); i++){
+void dfs(const graph &G, const unsigned s,std::vector<ll> &dist,std::vector<int> &pred){
+    std::vector<unsigned> color(G.size());
+    for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = inf;
         pred[i] = -1;
         color[i] = 0;
@@ -86,11 +86,11 @@ void dfs(const graph &G, const int s,std::vector<ll> &dist,std::vector<int> &pre
     dist[s] = 0;
     color[s] = 1;
 
-    std::stack<int> st;
+    std::stack<unsigned> st;
 
     st.push(s);
 
-    int u;
+    unsigned u;
     while(st.size()){
         u = st.top();
         st.pop();
@@ -105,9 +105,9 @@ void dfs(const graph &G, const int s,std::vector<ll> &dist,std::vector<int> &pre
     }
 }
 
-void dfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
-    std::vector<int> color(G.size());
-    for(unsigned int i = 0; i < dist.size(); i++){
+void dfs(const wgraph &G, const unsigned s,std::vector<ll> &dist,std::vector<int> &pred){
+    std::vector<unsigned> color(G.size());
+    for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = inf;
         pred[i] = -1;
         color[i] = 0;
@@ -115,11 +115,11 @@ void dfs(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pr
     dist[s] = 0;
     color[s] = 1;
 
-    std::stack<int> st;
+    std::stack<unsigned> st;
 
     st.push(s);
 
-    int u;
+    unsigned u;
     while(st.size()){
         u = st.top();
         st.pop();
