@@ -13,7 +13,7 @@ void bfs(const graph &G, const unsigned s,std::vector<ll> &dist,std::vector<int>
     // Initializes the distance,predecessor and color vectors
     std::vector<int> color(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
-        dist[i] = inf;
+        dist[i] = LLINF;
         pred[i] = -1;
         color[i] = 0;
     }
@@ -48,7 +48,7 @@ void bfs(const wgraph &G, const unsigned s,std::vector<ll> &dist,std::vector<int
     // Initializes the distance,predecessor and color vectors
     std::vector<unsigned> color(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
-        dist[i] = inf;
+        dist[i] = LLINF;
         pred[i] = -1;
         color[i] = 0;
     }

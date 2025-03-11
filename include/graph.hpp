@@ -8,5 +8,6 @@
 #include "graph/shortest_path.hpp"
 #include "graph/matrix.hpp"
 #include "graph/utils.hpp"
+#include "graph/gale_shapley.hpp"
 
 #endif // GRAPH

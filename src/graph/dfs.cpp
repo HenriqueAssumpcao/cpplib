@@ -27,7 +27,7 @@ void dfs_visit(const graph &G,const unsigned u,std::vector<ll> &dist,std::vector
 void dfs(const graph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<unsigned> &finish){
     std::vector<unsigned> color(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
-        dist[i] = inf;
+        dist[i] = LLINF;
         pred[i] = -1;
         color[i] = 0;
     }
@@ -60,7 +60,7 @@ void dfs_visit(const wgraph &G,const unsigned u,std::vector<ll> &dist,std::vecto
 void dfs(const wgraph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vector<unsigned> &finish){
     std::vector<unsigned> color(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
-        dist[i] = inf;
+        dist[i] = LLINF;
         pred[i] = -1;
         color[i] = 0;
     }
@@ -79,7 +79,7 @@ void dfs(const wgraph &G,std::vector<ll> &dist,std::vector<int> &pred, std::vect
 void dfs(const graph &G, const unsigned s,std::vector<ll> &dist,std::vector<int> &pred){
     std::vector<unsigned> color(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
-        dist[i] = inf;
+        dist[i] = LLINF;
         pred[i] = -1;
         color[i] = 0;
     }
@@ -108,7 +108,7 @@ void dfs(const graph &G, const unsigned s,std::vector<ll> &dist,std::vector<int>
 void dfs(const wgraph &G, const unsigned s,std::vector<ll> &dist,std::vector<int> &pred){
     std::vector<unsigned> color(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
-        dist[i] = inf;
+        dist[i] = LLINF;
         pred[i] = -1;
         color[i] = 0;
     }

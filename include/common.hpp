@@ -8,8 +8,8 @@
 #include <list>
 
 #define ll long long
-#define inf LLONG_MAX/2
-#define linf -LLONG_MAX/2
+#define LLINF LLONG_MAX/2
+#define IINF INT_MAX/2
 
 typedef std::vector<std::vector<bool>> bmatrix;
 typedef std::vector<std::vector<int>> intmatrix;
