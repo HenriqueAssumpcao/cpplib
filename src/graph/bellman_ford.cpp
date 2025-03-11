@@ -17,7 +17,7 @@ bool bellman_ford(const wgraph &G, const int s,std::vector<ll> &dist,std::vector
     for(unsigned i = 0; i < G.size()-1; i++){
         for(unsigned u = 0; u < G.size(); u++){
             for(auto [v,w] : G[u]){
-                if(dist[u] != inf and dist[v] > dist[u] + w){
+                if(dist[v] > dist[u] + w){
                     dist[v] = dist[u] + w;
                     pred[v] = u;
                 }
@@ -28,10 +28,10 @@ bool bellman_ford(const wgraph &G, const int s,std::vector<ll> &dist,std::vector
     // Checks for negative cycles
     for(unsigned u = 0; u < G.size(); u++){
         for(auto [v,w] : G[u]){
-            if(dist[u] != inf and dist[v] > dist[u] + w){
-                return false;
+            if(dist[v] > dist[u] + w){
+                return true;
             }
         }
     }
-    return true;
+    return false;
 }

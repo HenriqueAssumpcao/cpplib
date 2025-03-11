@@ -6,7 +6,7 @@
 #include "graph/shortest_path.hpp"
 
 
-void dijkstra(const wgraph &G, const unsigned s,std::vector<ll> &dist,std::vector<unsigned> &pred){
+void dijkstra(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     // Initializes distance and predecessor vectors
     for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = inf;
@@ -21,12 +21,15 @@ void dijkstra(const wgraph &G, const unsigned s,std::vector<ll> &dist,std::vecto
     while(pq.size()){
         auto [curr_dist,u] = pq.top();
         pq.pop();
-        for(auto [v,w]:G[u]){
-            if(dist[u] != inf and dist[v] > dist[u] + w){
-                dist[v] = dist[u] + w;
-                pred[v] = u;
-                pq.emplace(-dist[v],v);
+        if(dist[u] >= -curr_dist){
+            for(auto [v,w]:G[u]){
+                if(dist[v] > dist[u] + w){
+                    dist[v] = dist[u] + w;
+                    pred[v] = u;
+                    pq.emplace(-dist[v],v);
+                }
             }
+
         }
     }
 }

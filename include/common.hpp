@@ -4,19 +4,21 @@
 #define COMMON
 
 #include <vector>
-#include <limits>
+#include <climits>
+#include <list>
 
 #define ll long long
-#define inf std::numeric_limits<ll>::max()
+#define inf LLONG_MAX/2
+#define linf -LLONG_MAX/2
 
-#define bmatrix std::vector<std::vector<bool>>
-#define intmatrix std::vector<std::vector<int>>
-#define llmatrix std::vector<std::vector<ll>>
-#define fmatrix std::vector<std::vector<float>>
-#define dmatrix std::vector<std::vector<double>>
+typedef std::vector<std::vector<bool>> bmatrix;
+typedef std::vector<std::vector<int>> intmatrix;
+typedef std::vector<std::vector<ll>> llmatrix;
+typedef std::vector<std::vector<float>> fmatrix;
+typedef std::vector<std::vector<double>> dmatrix;
 
-#define graph std::vector<std::list<unsigned>> // type of a weightless graph
-#define wgraph std::vector<std::list<std::pair<unsigned,ll>>> // type of a weighted graph
+typedef std::vector<std::list<unsigned>> graph; // type of a weightless graph
+typedef std::vector<std::list<std::pair<unsigned,ll>>> wgraph; // type of a weighted graph
 
 
 

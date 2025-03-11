@@ -5,6 +5,7 @@
 #include <list>
 #include <unordered_map>
 #include <numeric>
+#include <climits>
 
 #include "common.hpp"
 #include "graph.hpp"
@@ -12,7 +13,33 @@
 #include "printing.hpp"
 
 
+using namespace std;
+
+
 int main(){
+
+    // Dijkstra test
+    wgraph G(5);
+    G[0] = {{1,10},{2,5}};
+    G[1] = {{2,2},{3,1}};
+    G[2] = {{3,9},{1,3},{4,2}};
+    G[3] = {{4,4}};
+    G[4] = {{0,7},{3,6}}; 
+
+    std::vector<ll> dist(5);
+    std::vector<int> pred(5);
+
+    dijkstra(G,0,dist,pred);
+
+    print_matrix<ll>(dist);
+
+    print_matrix<int>(pred);
+
+    llmatrix test = floyd_warshall(G);
+
+    print_matrix(test);
+
+
     // graph G(4);
     // G[0] = {1,1,1,3};
     // G[1] = {0,0,0,2};

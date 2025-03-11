@@ -22,9 +22,7 @@ llmatrix floyd_warshall(const graph &G){
     for(unsigned k = 0; k < G.size(); k++){
         for(unsigned i = 0; i < G.size(); i++){
             for(unsigned j = 0; j < G.size(); j++){
-                if(D[i][k] != inf and D[k][j] != inf){
-                    D[i][j] = std::min(D[i][j],D[i][k] + D[k][j]);
-                }
+                D[i][j] = std::min(D[i][j],D[i][k] + D[k][j]);
             }
         }
     }
@@ -50,9 +48,7 @@ llmatrix floyd_warshall(const wgraph &G){
     for(unsigned k = 0; k < G.size(); k++){
         for(unsigned i = 0; i < G.size(); i++){
             for(unsigned j = 0; j < G.size(); j++){
-                if(D[i][k] != inf and D[k][j] != inf){
-                    D[i][j] = std::min(D[i][j],D[i][k] + D[k][j]);
-                }
+                D[i][j] = std::min(D[i][j],D[i][k] + D[k][j]);
             }
         }
     }
