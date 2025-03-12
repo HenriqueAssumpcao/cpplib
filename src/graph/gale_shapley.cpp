@@ -5,49 +5,53 @@
 #include "graph/gale_shapley.hpp"
 
 
-bool prefers(int s, int h, int hh, intmatrix &sp){
-    // returns true if s prefers h to hh, otherwise returns false
-    for (unsigned i = 0; i < sp.size(); i++){
-    if (sp[s][i] == h){
-        return true;
-    }
-    else if (sp[s][i] == hh){
-        return false;
-    }
-    }
-    return false;
-}
+/*
+Gale-Shapley algorithm for finding a stable matching. Assumes that A,B are sets such that elements of A will propose to elements of B. Also assume that |A|<=|B|=n.
+PA is a matrix where the a-th row contains the elements of B ordered by the preference of a. Analogous for PB.
+Returns a std::vector of size |A| where the a-th entry corresponds to the element of B matched with a.
+O(|A|*|B|).
+*/
+std::vector<int> gale_shapley(intmatrix &PA, intmatrix &PB){
+    int n = PA.size(),m = PB.size();
 
-void gale_shapley(int n, std::vector<int> &h2s, std::vector<int> &s2h, intmatrix &hp, intmatrix &sp){
-    std::queue<int> q; // queue with hospitals
-    for (int i = 0; i < n; i++){
+    std::vector<int> matching(n,-1); // a-th entry is the element of B matched to a, -1 if unmatched
+    std::vector<int> inv_matching(m,-1); // b-th entry is the element of A matched to b, -1 if unmatched
+    std::vector<int> last_proposed(n,-1); // a-th entry stores the index of the last element proposed by a in its preference list
+    
+    intmatrix b_ids(m,std::vector<int>(n)); // b_ids[b][a] stores the index of a in b's preference list, hence b_ids[b][a] < b_ids[b][aa] if b prefers a to aa
+    for(int b = 0; b < m; b++){
+        for(int i = 0; i < n; i++){
+            b_ids[b][PB[b][i]] = i; 
+        }
+    }
+
+    std::queue<int> q; // stores the std::queue of elements of A yet to be matched
+    for(int i = 0; i < n; i++){
         q.emplace(i);
     }
-
-    int s, h, hh;
-    std::vector<int> last_prop(n, -1); // last_prop[h] is the last index in hp[h] that was proposed to by h
-    while (q.size()){
-        h = q.front();
+    int a,aa,b;
+    while(q.size()){
+        a = q.front();
         q.pop();
+        b = PA[a][last_proposed[a]+1];
+        last_proposed[a]++;
 
-        s = hp[h][last_prop[h] + 1]; // selects the highest priority student that was not proposed to by h
-        last_prop[h]++;
-
-        if (s2h[s] == -1){
-            s2h[s] = h;
-            h2s[h] = s;
+        if(inv_matching[b] == -1){
+            matching[a] = b;
+            inv_matching[b] = a;
         }
         else{
-            hh = s2h[s];
-            if (prefers(s, h, hh, sp)){ // if s is matched with hh but prefers h
-                h2s[h] = s;
-                s2h[s] = h;
-                h2s[hh] = -1;
-                q.emplace(hh);
+            aa = inv_matching[b];
+            if(b_ids[b][a] < b_ids[b][aa]){
+                matching[a] = b;
+                inv_matching[b] = a;
+                matching[aa] = -1;
+                q.emplace(aa);
             }
-            else{ // s rejects h, so we put it again on the queue
-                q.emplace(h);
+            else{
+                q.emplace(a);
             }
         }
     }
+    return matching;
 }
