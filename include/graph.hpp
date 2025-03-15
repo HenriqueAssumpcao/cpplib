@@ -9,5 +9,6 @@
 #include "graph/matrix.hpp"
 #include "graph/utils.hpp"
 #include "graph/gale_shapley.hpp"
+#include "graph/mst.hpp"
 
 #endif // GRAPH
