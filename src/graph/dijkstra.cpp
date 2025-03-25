@@ -8,6 +8,7 @@
 
 void dijkstra(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     // Initializes distance and predecessor vectors
+    dist.resize(G.size());pred.resize(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = LLINF;
         pred[i] = -1;
