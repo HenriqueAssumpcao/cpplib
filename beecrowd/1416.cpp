@@ -8,28 +8,6 @@ using namespace std;
 #define IINF INT_MAX/2
 
 typedef long long ll;
-typedef vector<list<pair<int,ll>>> wgraph; // weighted graph
-typedef vector<list<int>> graph; // unweighted graph
-
-typedef vector<vector<int>> imatrix;
-typedef vector<vector<ll>> llmatrix;
-
-
-template <typename T>
-void print_vector(vector<T> &vec){
-    for(unsigned i = 0; i < vec.size(); i++){
-        cout << vec[i] << " "; 
-    }
-    cout << endl;
-}
-
-template <typename T>
-void print_matrix(vector<vector<T>> &M){
-    for(unsigned i = 0; i < M.size(); i++){
-        print_vector<T>(M[i]);
-    }
-}
-
 
 vector<pair<int,int>> subvec_withids(vector<int> &vec, vector<int> &ids){
     vector<pair<int,int>> ret;
@@ -70,7 +48,7 @@ void update_bounds(int bigger, int smaller,int &lb, int &ub, vector<int> &fattem
 }
 
 int main(){
-    //std::ios::sync_with_stdio(0);cin.tie(0);
+    std::ios::sync_with_stdio(0);cin.tie(0);
 
     int t,p;
     int counter = 1;
@@ -78,8 +56,6 @@ int main(){
         if(t == 0){
             break;
         }
-        //cout << counter << endl;
-        //cout << t << " " << p << endl;
 
         vector<int> fattempts(t,0),times(t,0);
         vector<int> penalties(t,0);
@@ -91,7 +67,6 @@ int main(){
             num_solved = 0;
             for(int j = 0; j < p; j++){
                 cin >> temp;
-                //cout << temp << " ";
                 int bar_pos = temp.find('/',0);
                 string s = temp.substr(bar_pos+1,temp.size());
                 if(s != "-"){
@@ -102,13 +77,8 @@ int main(){
                     num_solved++;
                 }
             }
-            //cout << endl;
             solved[num_solved].push_back(i);
         }
-
-        //print_matrix<int>(solved);
-        //print_vector<int>(penalties);
-        //print_vector<int>(fattempts);
 
         int lb = 1,ub = IINF;
         bool found_eq = false;
@@ -118,9 +88,6 @@ int main(){
             if(ids.size() >= 2){
                 vector<pair<int,int>> aux = subvec_withids(penalties,ids);
                 sort(aux.begin(),aux.end());
-                // for(auto [a,b] : aux){
-                //     cout << a << " " << b << endl;
-                // }
                 int i = aux.size()-1;
                 while(i > 0){
                     int bigger = aux[i].second;
@@ -151,7 +118,6 @@ int main(){
         }
         cout << endl;
         counter++;
-        //cout << endl;
     }
     return 0;
 }
