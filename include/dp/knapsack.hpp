@@ -7,6 +7,7 @@
 
 #include "common.hpp"
 
-void knapsack(int n, int w, std::vector<int> &values, std::vector<int> &weights, intmatrix &opt, std::vector<int> &sol);
+void knapsack_primal(int &n, int &C,std::vector<int> &weights, std::vector<int> &values, intmatrix &dp, std::vector<int> &sol);
+void knapsack_dual(int &n, int &C,std::vector<int> &weights, std::vector<int> &values, intmatrix &dp, std::vector<int> &sol);
 
 #endif //KNAPSACK
