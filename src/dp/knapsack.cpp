@@ -9,7 +9,7 @@ Problem: Given n items, with weights w_1,...,w_n, values v_1,...,v_n, find a sub
 Solution: Create a table dp where dp[i][j] is the maximum value subset of {1,...,i} with weight at most j, and return dp[n][C]
 Complexity: O(nC)
 */
-void knapsack_primal(int &n, int &C,std::vector<int> &weights, std::vector<int> &values, intmatrix &dp, std::vector<int> &sol){
+void knapsack_max(const int &n, const int &C,const std::vector<int> &weights,const std::vector<int> &values, intmatrix &dp, std::vector<int> &sol){
     dp = intmatrix(n+1,std::vector<int>(C+1,0));
     sol = std::vector<int>(n,0);
 
@@ -34,20 +34,19 @@ void knapsack_primal(int &n, int &C,std::vector<int> &weights, std::vector<int> 
 }
 
 /*
-Problem: Given n items, with weights w_1,...,w_n, values v_1,...,v_n, find a subset with maximum value with total weight at most C;
+Problem: Given n items, with weights w_1,...,w_n, values v_1,...,v_n, find a subset with minimum weight and value at least V;
 Solution: Create a table dp where dp[i][j] is the minimum weight of a subset that obtains at least j total value;
-Complexity: O(nL), where L is the sum of the values
+Complexity: O(nV)
 */
-void knapsack_dual(int &n, int &C,std::vector<int> &weights, std::vector<int> &values, intmatrix &dp, std::vector<int> &sol){
-    int L = std::accumulate(values.begin(),values.end(),0);
-    dp = intmatrix(n+1,std::vector<int>(L+1,0));
-    for(int j = 1; j <= L; j++){
+void knapsack_min(const int &n, const int &V,const std::vector<int> &weights, const std::vector<int> &values, intmatrix &dp, std::vector<int> &sol){
+    dp = intmatrix(n+1,std::vector<int>(V+1,0));
+    for(int j = 1; j <= V; j++){
         dp[0][j] = IINF;
     }
     sol = std::vector<int>(n,0);
 
     for(int i = 1; i <= n; i++){
-        for(int j = 1; j <= L; j++){
+        for(int j = 1; j <= V; j++){
             int aux = std::max(0,j-values[i-1]);
             if(dp[i-1][j] == IINF){
                 if(dp[i-1][aux] == IINF){
@@ -68,15 +67,11 @@ void knapsack_dual(int &n, int &C,std::vector<int> &weights, std::vector<int> &v
         }
     }
 
-    int j = 0;
-    while(dp[n][j+1] <= C){
-        j++;
-    }
-
+    int aux = V;
     for(int i = n; i > 0; i--){
-        if(dp[i][j] < dp[i-1][j]){
+        if(dp[i][aux] < dp[i-1][aux]){
             sol[i-1] = 1;
-            j = std::max(0,j-values[i-1]);
+            aux -= values[i-1];
         }
     }
 }
