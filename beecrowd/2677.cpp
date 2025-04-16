@@ -10,24 +10,8 @@ using namespace std;
 typedef long long ll;
 typedef vector<vector<int>> imatrix;
 
-template <typename T>
-void print_vector(vector<T> &vec){
-    for(unsigned i = 0; i < vec.size(); i++){
-        cout << vec[i] << " "; 
-    }
-    cout << endl;
-}
-
-template <typename T>
-void print_matrix(vector<vector<T>> &M){
-    for(unsigned i = 0; i < M.size(); i++){
-        print_vector<T>(M[i]);
-    }
-}
-
-
 int main(){
-    //std::ios::sync_with_stdio(0);cin.tie(0);
+    std::ios::sync_with_stdio(0);cin.tie(0);
 
     int n;
     while(cin >> n){
@@ -43,9 +27,6 @@ int main(){
             nums[i] = (temp % 2 == 0);
         }
 
-        print_vector<bool>(nums);
-        cout << endl;
-
         imatrix dp(N,vector<int>(N,0));
         imatrix choice(N,vector<int>(N,0));
 
@@ -58,42 +39,33 @@ int main(){
         dp[N-1][N-1] = nums[N-1];
         choice[N-1][N-1] = N-1;
 
-
-        print_matrix<int>(dp);
-        cout << endl;
-        print_matrix<int>(choice);
-
         for(int d = 2; d < N; d++){
-            cout << "diagonal = " << d << endl;
             for(int i = 0; i < N-d; i++){
                 int j = i + d;
-                cout << "i = " << i << ";j = " << j << endl;
-                if(dp[i+1][j] < dp[i][j-1]){
-                    choice[i][j] = i;
-                    dp[i][j] = nums[i];
-                    dp[i][j] += (choice[i+1][j] == j) ? (dp[i+1][j-1]) : (dp[i+2][j]);
-                }
-                else if(dp[i+1][j] > dp[i][j-1]){
-                    choice[i][j] = j;
-                    dp[i][j] = nums[j];
-                    dp[i][j] += (choice[i][j-1] == i) ? (dp[i+1][j-1]) : (dp[i][j-2]);
+                int temp_left,temp_right;
+                if(choice[i+1][j] == i+1){
+                    temp_left = nums[i] + dp[i+2][j];
                 }
                 else{
-                    int temp1 = (choice[i][j-1] == i) ? (dp[i+1][j-1]) : (dp[i][j-2]);
-                    int temp2 = (choice[i+1][j] == j) ? (dp[i+1][j-1]) : (dp[i+2][j]);
-                    dp[i][j] = max(nums[i] + temp1,nums[j] + temp2);
+                    temp_left = nums[i] + dp[i+1][j-1];
                 }
-
+                if(choice[i][j-1] == i){
+                    temp_right = nums[j] + dp[i+1][j-1];
+                }
+                else{
+                    temp_right = nums[j] + dp[i][j-2];
+                }
+                if(temp_left >= temp_right){
+                    dp[i][j] = temp_left;
+                    choice[i][j] = i;
+                }
+                else{
+                    dp[i][j] = temp_right;
+                    choice[i][j] = j;
+                }
             }
         }
-
-        print_matrix<int>(dp);
-
         cout << dp[0][N-1] << endl;
-
-
     }
-
-
     return 0;
 }
