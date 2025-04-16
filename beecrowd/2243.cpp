@@ -9,19 +9,7 @@ using namespace std;
 
 typedef long long ll;
 
-
-int main(){
-    std::ios::sync_with_stdio(0);cin.tie(0);
-
-    int n;
-    cin >> n;
-
-    vector<int> height(n);
-
-    for(int i = 0; i < n; i++){
-        cin >> height[i];
-    }
-
+int sol_dp(int &n, vector<int> &height){
     vector<int> dp_left(n),dp_right(n);
     
     dp_left[0] = 1;
@@ -55,7 +43,22 @@ int main(){
         ret = max(ret,min(dp_left[i],dp_right[i]));
     }
 
-    cout << ret << endl;
+    return ret;
+}
+
+int main(){
+    std::ios::sync_with_stdio(0);cin.tie(0);
+
+    int n;
+    cin >> n;
+
+    vector<int> height(n);
+
+    for(int i = 0; i < n; i++){
+        cin >> height[i];
+    }
+
+    cout << sol_dp(n,height) << endl;
 
     return 0;
 }
