@@ -65,7 +65,7 @@ O(n^3)
 */
 template <typename T>
 std::vector<std::vector<T>> matmul(const std::vector<std::vector<T>> &M1,const std::vector<std::vector<T>> &M2){
-    std::vector<std::vector<T>> M(M1.size(),std::vector<T>(M1.size()));
+    std::vector<std::vector<T>> M(M1.size(),std::vector<T>(M2[0].size()));
     for(unsigned i = 0; i < M1.size(); i++){
         for(unsigned j = 0; j < M2[0].size(); j++){
             for(unsigned k = 0; k < M1[0].size(); k++){
