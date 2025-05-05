@@ -12,17 +12,19 @@ typedef vector<list<int>> graph; // unweighted graph
 typedef vector<vector<int>> imatrix;
 typedef vector<vector<ll>> llmatrix;
 
-// Edmonds Karp 
+
+// Edge struct
 
 struct flow_edge{
     int u,v; // Endpoits of directed edge
     ll cap,flow = 0;
-    bool in_g; // 1 if edge belongs to the original graph, 0 if it does not
-    flow_edge(int _u,int _v, ll _cap, bool _in_g):u(_u),v(_v),cap(_cap),in_g(_in_g){};
+    flow_edge(int _u,int _v, ll _cap):u(_u),v(_v),cap(_cap){};
 
 };
 
-ll find_aug_path(int s, int t, int &n, graph &g, vector<flow_edge> &edges, vector<int> &parent){
+// Capacity Scaling (uses the residual graph!)
+
+ll find_aug_path_lb(int s, int t, int n, ll cap_lb, graph &g, vector<flow_edge> &edges, vector<int> &parent){
     parent = vector<int>(n,-1);
     vector<bool> visited(n,0);
     visited[s] = 1;
@@ -35,7 +37,7 @@ ll find_aug_path(int s, int t, int &n, graph &g, vector<flow_edge> &edges, vecto
         q.pop();
 
         for(int i : g[u]){
-            if(visited[edges[i].v] == 0 && edges[i].cap > 0){
+            if(visited[edges[i].v] == 0 && edges[i].cap >= cap_lb){
                 visited[edges[i].v] = 1;
                 parent[edges[i].v] = i;
                 flow = min(flow,edges[i].cap);
@@ -49,22 +51,22 @@ ll find_aug_path(int s, int t, int &n, graph &g, vector<flow_edge> &edges, vecto
     return 0;
 }
 
-ll edmonds_karp_maxflow(int s, int t, int &n, graph &g, vector<flow_edge> &edges){
+ll edmonds_karp_maxflow_lb(int s, int t, int n, ll cap_lb, graph &g, vector<flow_edge> &edges){
     ll max_flow = 0;
     vector<int> parent;
 
     ll curr_flow;
-    while(curr_flow = find_aug_path(s,t,n,g,edges,parent)){
+    while(curr_flow = find_aug_path_lb(s,t,n,cap_lb,g,edges,parent)){
         max_flow += curr_flow;
         int temp = t;
         while(temp != s){
             int prev = edges[parent[temp]].u;
-            int op_edge_id = (edges[parent[temp]].in_g == 1) ? (parent[temp]+1) : (parent[temp]-1);
+            int op_edge_id = parent[temp] ^ 1;
 
-            edges[parent[temp]].cap -= curr_flow;
             edges[parent[temp]].flow += curr_flow;
-            edges[op_edge_id].cap += curr_flow;
+            edges[parent[temp]].cap -= curr_flow;
             edges[op_edge_id].flow -= curr_flow;
+            edges[op_edge_id].cap += curr_flow;
             temp = prev;
         }
     }
@@ -72,24 +74,26 @@ ll edmonds_karp_maxflow(int s, int t, int &n, graph &g, vector<flow_edge> &edges
     return max_flow;
 }
 
-void min_cut(int s, int &n, graph &g, vector<flow_edge> &edges, vector<int> &is_in_cut){
-    is_in_cut = vector<int>(n,0);
-    is_in_cut[s] = 1;
-
-    queue<int> q;
-    q.push(s);
-
-    while(q.size()){
-        int u = q.front();
-        q.pop();
-        for(int i : g[u]){
-            if(is_in_cut[edges[i].v] == 0 && edges[i].cap > 0){
-                is_in_cut[edges[i].v] = 1;
-                q.push(edges[i].v);
-            }
-        }
+ll cap_scaling_maxflow(int s, int t, int n, graph &g, vector<flow_edge> &edges){
+    ll max_cap = 0;;
+    vector<flow_edge> res_edges;
+    for(flow_edge e:edges){
+        max_cap = max(max_cap,e.cap);
+        res_edges.push_back(e);
     }
+    ll max_flow = 0;
+    while(max_cap >= 1){
+        max_flow += edmonds_karp_maxflow_lb(s,t,n,max_cap,g,res_edges);
+        max_cap = (max_cap >> 1);
+    }
+
+    for(int i = 0; i < edges.size(); i++){
+        edges[i].flow = res_edges[i].flow;
+    }
+
+    return max_flow;
 }
+
 
 int main(){
 
@@ -101,15 +105,22 @@ int main(){
     int edge_id = 0;
     int u,v;
     ll c;
+    map<pair<int,int>,int> pair2edge;
     for(int i = 0; i < m; i++){
         cin >> u >> v >> c;
         u--;v--;
-        edges.push_back(flow_edge(u,v,c,1));
-        edges.push_back(flow_edge(v,u,0,0));
-        g[u].push_back(edge_id);
-        g[v].push_back(edge_id+1);
-        edge_id += 2;
+        if(pair2edge.find({u,v}) == pair2edge.end()){
+            edges.push_back(flow_edge(u,v,c));
+            edges.push_back(flow_edge(v,u,0));
+            g[u].push_back(edge_id);
+            g[v].push_back(edge_id+1);
+            pair2edge[{u,v}] = edge_id;
+            edge_id += 2;
+        }
+        else{
+            edges[pair2edge[{u,v}]].cap += c;
+        }
     }
 
-    cout << edmonds_karp_maxflow(0,n-1,n,g,edges) << endl;
+    cout << cap_scaling_maxflow(0,n-1,n,g,edges) << endl;
 }
