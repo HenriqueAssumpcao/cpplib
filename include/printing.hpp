@@ -4,7 +4,6 @@
 #define PRINTING
 
 #include <iostream>
-#include <vector>
 #include "common.hpp"
 
 /*

@@ -3,9 +3,6 @@
 #ifndef GRAPH_MST
 #define GRAPH_MST
 
-#include <list>
-#include <vector>
-
 #include "common.hpp"
 
 // Prim

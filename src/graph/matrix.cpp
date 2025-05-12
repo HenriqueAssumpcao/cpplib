@@ -1,7 +1,3 @@
-#include <list>
-#include <vector>
-
-#include "common.hpp"
 #include "graph/matrix.hpp"
 
 graph adj_list(const bmatrix &A){

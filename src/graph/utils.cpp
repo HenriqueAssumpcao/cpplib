@@ -1,10 +1,4 @@
-#include <list>
-#include <vector>
-
-#include "common.hpp"
 #include "graph/utils.hpp"
-
-
 
 // O(V)
 std::vector<unsigned> out_deg(const graph &G){

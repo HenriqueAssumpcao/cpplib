@@ -3,9 +3,6 @@
 #ifndef GRAPH_SHORTEST_PATH
 #define GRAPH_SHORTEST_PATH
 
-#include <list>
-#include <vector>
-
 #include "common.hpp"
 
 // Bellman-Ford

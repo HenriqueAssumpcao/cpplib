@@ -1,8 +1,3 @@
-#include <vector>
-#include <queue>
-#include <list>
-
-#include "common.hpp"
 #include "graph/mst.hpp"
 
 void prim(const int s,const wgraph &g, std::vector<int> &pred){

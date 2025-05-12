@@ -3,9 +3,6 @@
 #ifndef GRAPH_TRANSFORM
 #define GRAPH_TRANSFORM
 
-#include <list>
-#include <vector>
-
 #include "common.hpp"
 
 // O(E)

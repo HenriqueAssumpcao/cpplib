@@ -3,9 +3,6 @@
 #ifndef GRAPH_UTILS
 #define GRAPH_UTILS
 
-#include <list>
-#include <vector>
-
 #include "common.hpp"
 
 // O(V)

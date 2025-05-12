@@ -1,9 +1,4 @@
-#include <vector>
-#include <queue>
-
-#include "common.hpp"
 #include "graph/gale_shapley.hpp"
-
 
 /*
 Gale-Shapley algorithm for finding a stable matching. Assumes that A,B are sets such that elements of A will propose to elements of B. Also assume that |A|<=|B|=n.

@@ -3,9 +3,6 @@
 #ifndef GRAPH_SEARCH
 #define GRAPH_SEARCH
 
-#include <list>
-#include <vector>
-
 #include "common.hpp"
 
 // BFS

@@ -8,12 +8,19 @@ using namespace std;
 #define IINF INT_MAX/2
 
 typedef long long ll;
-typedef vector<list<pair<int,ll>>> wgraph; // weighted graph
-typedef vector<list<int>> graph; // unweighted graph
+typedef vector<vector<pair<int,ll>>> wgraph; // weighted graph
+typedef vector<vector<int>> graph; // unweighted graph
 
 typedef vector<vector<int>> imatrix;
 typedef vector<vector<ll>> llmatrix;
 
+template <typename T>
+void print_vector(vector<T> &vec){
+    for(unsigned i = 0; i < vec.size(); i++){
+        cout << vec[i] << " "; 
+    }
+    cout << endl;
+}
 
 int main(){
     //std::ios::sync_with_stdio(0);cin.tie(0);
