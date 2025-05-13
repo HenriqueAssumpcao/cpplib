@@ -1,6 +1,5 @@
 #include <numeric>
 #include <vector>
-
 #include "common.hpp"
 #include "dp/knapsack.hpp"
 
