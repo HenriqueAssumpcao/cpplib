@@ -6,7 +6,6 @@ void build_flow_graph(const int n,const int m,const bool merge_multi_edges, std:
     ll c;
     int eid = 0;
     if(merge_multi_edges){
-        // merges multi edges into a single edge
         std::map<std::pair<int,int>,int> pair2edge;
         for(int i = 0; i < m; i++){
             std::cin >> u >> v >> c;
@@ -25,7 +24,6 @@ void build_flow_graph(const int n,const int m,const bool merge_multi_edges, std:
         }
     }
     else{
-        // maintains multi edges
         for(int i = 0; i < m; i++){
             std::cin >> u >> v >> c;
             u--;v--;

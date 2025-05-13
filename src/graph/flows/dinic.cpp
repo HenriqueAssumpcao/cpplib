@@ -1,12 +1,5 @@
 #include "graph/flows.hpp"
 
-/*
-Dinic's algorithm for finding the maximum flow.
-Overview: at each iteration, first perform a bfs in order to get the bfs layers, and then push flow using a dfs only looking at edges between layers.
-O(n^2m) in general, O(m*min(m^1/2,n^2/3)) if all capacities are equal to one. 
-Expects graph coming from create_flow_graph.
-Preserves the capacities in the input edges, i.e., doesn't explicitly use the residual graph.
-*/
 void bfs(const int s,const int n,const graph &g,const std::vector<flow_edge> &edges, std::vector<int> &bfs_layer,const ll cap_lb){
     bfs_layer = std::vector<int>(n,-1);
     std::queue<int> q;
@@ -45,10 +38,7 @@ const ll flow,const graph &g, std::vector<flow_edge> &edges,std::vector<int> &bf
     return 0;
 
 }
-/*
-Returns the maxflow, and also stores the partition of vertices that yield the minimum cut in the min_cut std::vector, where min_cut[u] = 0 if u belongs to the block
-containing s, and 1 if it belongs to the block containing t.
-*/
+
 ll dinic_maxflow(const int s,const int t,const int n,const graph &g, std::vector<flow_edge> &edges, std::vector<int> &min_cut,const ll cap_lb){
     std::vector<int> bfs_layer,dfs_ptr;
     ll max_flow = 0,curr_flow;

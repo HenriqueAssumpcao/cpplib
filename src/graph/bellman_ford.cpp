@@ -1,6 +1,5 @@
 #include "graph/shortest_path.hpp"
 
-// Weighted
 bool bellman_ford(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
     // Initializes distance and predecessor vectors
     for(unsigned i = 0; i < dist.size(); i++){

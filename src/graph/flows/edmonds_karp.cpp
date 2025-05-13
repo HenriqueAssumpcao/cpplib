@@ -1,13 +1,5 @@
 #include "graph/flows.hpp"
 
-/*
-Edmonds-Karp algorithm for finding the maximum flow. 
-Overview: at each iteration finds an augmenting path via a BFS, and increments the flow as much as possible, until there are no more augmenting paths.
-O(nm^2), where n is the number of nodes and m is the number of arcs.
-Expects graph coming from create_flow_graph.
-Preserves the capacities in the input edges, i.e., doesn't explicitly use the residual graph.
-*/
-
 ll aug_path_bfs(const int s,const int t,const int n,const graph &g,const std::vector<flow_edge> &edges, std::vector<int> &parent,const ll cap_lb){
     parent = std::vector<int>(n,-1);
     std::vector<bool> visited(n,0);
@@ -35,10 +27,6 @@ ll aug_path_bfs(const int s,const int t,const int n,const graph &g,const std::ve
     return 0;
 }
 
-/*
-Returns the maxflow, and also stores the partition of vertices that yield the minimum cut in the min_cut vector, where min_cut[u] = 0 if u belongs to the block
-containing s, and 1 if it belongs to the block containing t.
-*/
 ll edmonds_karp_maxflow(const int s,const int t,const int n,const graph &g, std::vector<flow_edge> &edges,std::vector<int> &min_cut,const ll cap_lb){
     ll max_flow = 0;
     std::vector<int> parent;

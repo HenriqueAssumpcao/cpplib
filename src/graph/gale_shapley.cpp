@@ -1,11 +1,5 @@
 #include "graph/gale_shapley.hpp"
 
-/*
-Gale-Shapley algorithm for finding a stable matching. Assumes that A,B are sets such that elements of A will propose to elements of B. Also assume that |A|<=|B|=n.
-PA is a matrix where the a-th row contains the elements of B ordered by the preference of a. Analogous for PB.
-Returns a std::vector of size |A| where the a-th entry corresponds to the element of B matched with a.
-O(|A|*|B|).
-*/
 std::vector<int> gale_shapley(intmatrix &PA, intmatrix &PB){
     int n = PA.size(),m = PB.size();
 
