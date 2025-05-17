@@ -8,7 +8,7 @@ void add_edge(int u, int v, ll c,int &eid, std::vector<flow_edge> &edges, graph 
     eid+=2;
 }
 
-void build_flow_graph(const int n,const int m, std::vector<flow_edge> &edges, graph &g,const bool merge_multi_edges=true,const bool undirected=false){
+void build_flow_graph(const int n,const int m, std::vector<flow_edge> &edges, graph &g,const bool merge_multi_edges,const bool undirected){
     g = graph(n);
     int u,v;
     ll c;
