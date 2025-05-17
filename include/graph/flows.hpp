@@ -53,9 +53,10 @@ struct flow_edge {
  *
  * @param n                 Number of vertices in the graph
  * @param m                 Number of edges in the input
- * @param merge_multi_edges Whether to merge multiple edges between same vertices
  * @param edges             Output vector of flow edges (will be cleared and populated)
  * @param g                 Output adjacency list (will be cleared and populated)
+ * @param merge_multi_edges Whether to merge multiple edges between same vertices
+ * @param undirected Whether the input graph is undirected
  *
  * @note Input format expected: for each edge, provide "u v c" representing
  *       start vertex, end vertex, and capacity (1-based indices)
@@ -71,7 +72,7 @@ struct flow_edge {
  *   build_flow_graph(n, m, true, edges, g);
  * @endcode
  */
-void build_flow_graph(const int n,const int m,const bool merge_multi_edges, std::vector<flow_edge> &edges, graph &g);
+void build_flow_graph(const int n,const int m, std::vector<flow_edge> &edges, graph &g,const bool merge_multi_edges=true,const bool undirected=false);
 
 /**
  * Finds an augmenting path using BFS and returns its bottleneck capacity.

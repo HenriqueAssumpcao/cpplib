@@ -1,6 +1,14 @@
 #include "graph/flows.hpp"
 
-void build_flow_graph(const int n,const int m,const bool merge_multi_edges, std::vector<flow_edge> &edges, graph &g){
+void add_edge(int u, int v, ll c,int &eid, std::vector<flow_edge> &edges, graph &g){
+    edges.push_back(flow_edge(u,v,c));
+    edges.push_back(flow_edge(v,u,0));
+    g[u].push_back(eid);
+    g[v].push_back(eid+1);
+    eid+=2;
+}
+
+void build_flow_graph(const int n,const int m, std::vector<flow_edge> &edges, graph &g,const bool merge_multi_edges=true,const bool undirected=false){
     g = graph(n);
     int u,v;
     ll c;
@@ -10,16 +18,22 @@ void build_flow_graph(const int n,const int m,const bool merge_multi_edges, std:
         for(int i = 0; i < m; i++){
             std::cin >> u >> v >> c;
             u--;v--;
+            if(u == v){
+                continue;
+            }
             if(pair2edge.find({u,v}) == pair2edge.end()){
-                edges.push_back(flow_edge(u,v,c));
-                edges.push_back(flow_edge(v,u,0));
-                g[u].push_back(eid);
-                g[v].push_back(eid+1);
                 pair2edge[{u,v}] = eid;
-                eid += 2;
+                add_edge(u,v,c,eid,edges,g);
+                if(undirected){
+                    pair2edge[{v,u}] = eid;
+                    add_edge(v,u,c,eid,edges,g);
+                }
             }
             else{
                 edges[pair2edge[{u,v}]].cap += c;
+                if(undirected){
+                    edges[pair2edge[{v,u}]].cap += c;
+                }
             }
         }
     }
@@ -27,11 +41,13 @@ void build_flow_graph(const int n,const int m,const bool merge_multi_edges, std:
         for(int i = 0; i < m; i++){
             std::cin >> u >> v >> c;
             u--;v--;
-            edges.push_back(flow_edge(u,v,c));
-            edges.push_back(flow_edge(v,u,0));
-            g[u].push_back(eid);
-            g[v].push_back(eid+1);
-            eid += 2;
+            if(u == v){
+                continue;
+            }
+            add_edge(u,v,c,eid,edges,g);
+            if(undirected){
+                add_edge(v,u,c,eid,edges,g);
+            }
         }
     }
 }
