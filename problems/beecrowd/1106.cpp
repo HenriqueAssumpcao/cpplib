@@ -15,14 +15,6 @@ typedef vector<vector<int>> imatrix;
 typedef vector<vector<ll>> llmatrix;
 typedef vector<vector<double>> dmatrix;
 
-template <typename T>
-void print_vector(vector<T> &vec){
-    for(unsigned i = 0; i < vec.size()-1; i++){
-        cout << vec[i] << " "; 
-    }
-    cout << vec[vec.size()-1] << endl;
-}
-
 void post_order(int node,int &n,vector<pair<int,int>> &children, vector<int> &ret){
     if(node >= n){
         post_order(children[node-n].first,n,children,ret);

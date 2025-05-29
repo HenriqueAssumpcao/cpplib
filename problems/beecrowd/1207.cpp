@@ -85,88 +85,40 @@ ll dinic_maxflow(int s, int t, int n, graph &g, vector<flow_edge> &edges, ll cap
 
 //
 
-
 int main(){
 
-    int n,m,G;
-    while(cin >> n >> m >> G){
-        if(n == 0){
-            break;
+    int n,m;
+    while(cin >> n >> m){
+        vector<int> costs(n),sizes(m),benefits(m);
+        for(int i = 0;i < n; i++){
+            cin >> costs[i];
+        }
+        for(int i = 0; i < m; i++){
+            cin >> sizes[i];
         }
 
-        vector<int> points(n,0);
-        imatrix games_left(n,vector<int>(n,m));
-
-        while(G--){
-            int u,v;
-            char res;
-
-            cin >> u >> res >> v;
-            if(res == '='){
-                points[u]++;
-                points[v]++;
-            }
-            else if(res == '<'){
-                points[v] += 2;
-            }
-            games_left[u][v]--;
-            games_left[v][u]--;
-        }
-        for(int v = 1; v < n; v++){
-            if(games_left[0][v] > 0){
-                points[0] += 2*games_left[0][v];
-                games_left[0][v] = 0;
-                games_left[v][0] = 0;
-            }
-        }
-        int total_games_left = 0;
-        for(int u = 1; u < n; u++){
-            for(int v = u+1; v < n; v++){
-                total_games_left += games_left[u][v];
-            }
-        }
-        
-        int numnodes = 2 + n + total_games_left;
-        graph g(numnodes);
         vector<flow_edge> edges;
-        int s = numnodes-2,t = numnodes-1;
+        graph g(n+m+2);
         int eid = 0;
-        int aux = n;
+        int s = n+m,t = n+m+1;
 
-        for(int u = 1; u < n; u++){
-            for(int v = u+1; v < n; v++){
-                if(games_left[u][v] > 0){
-                    add_edge(s,aux,2*games_left[u][v],eid,edges,g);
-                    add_edge(aux,u,2*games_left[u][v],eid,edges,g);
-                    add_edge(aux,v,2*games_left[u][v],eid,edges,g);
-                    aux++;
-                }
+        for(int i = 0;i < m; i++){
+            cin >> benefits[i];
+            add_edge(s,n+i,benefits[i],eid,edges,g);
+            for(int j = 0; j < sizes[i];j++){
+                int v;
+                cin >> v;
+                v--;
+                add_edge(n+i,v,LLINF,eid,edges,g);
             }
         }
-        bool impossible = false;
-        for(int u = 1; u < n; u++){
-            if(points[u] >= points[0]){
-                impossible = true;
-                break;
-            }
-            add_edge(u,t,points[0]-points[u]-1,eid,edges,g);
+        for(int i = 0;i < n; i++){
+            add_edge(i,t,costs[i],eid,edges,g);
         }
-        if(impossible){
-            cout << "N" << endl;
-        }
-        else{
-            ll max_flow = dinic_maxflow(s,t,numnodes,g,edges);
-            impossible = (max_flow != (2*total_games_left));
-            if(impossible){
-                cout << "N" << endl;
-            }
-            else{
-                cout << "Y" << endl;
-            }
-        }
-        
+
+        ll min_cut = dinic_maxflow(s,t,n+m+2,g,edges);
+        cout << (accumulate(benefits.begin(),benefits.end(),0) - min_cut) << endl;
     }
-
 
 
     return 0;
