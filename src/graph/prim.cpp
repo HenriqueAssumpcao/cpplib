@@ -25,7 +25,7 @@ ll mst_prim(const int s,const int n,const wgraph &g, std::vector<int> &pred){
     }
 
     ll mst_cost = 0;
-    for(int u = 1; u < n; u++){
+    for(int u = 0; u < n; u++){
         if(key[u] != LLINF){
             mst_cost += key[u];
         }
