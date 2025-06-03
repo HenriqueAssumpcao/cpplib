@@ -11,6 +11,7 @@
 #include "graph/gale_shapley.hpp"
 #include "graph/mst.hpp"
 #include "graph/flows.hpp"
+#include "graph/ccs.hpp"
 
 
 #endif // GRAPH

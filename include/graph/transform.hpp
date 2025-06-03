@@ -16,7 +16,7 @@ O(V+E)
 graph equivalent_graph(const graph &G);
 
 /*
-Returns the squared graph of input graph, i.e., the graph in which (u,v) are connected iff there is a path of length at most 2 between u and v in the original graph.acoshf128
+Returns the squared graph of input graph, i.e., the graph in which (u,v) are connected iff there is a path of length at most 2 between u and v in the original graph
 
 O(VE)
 */

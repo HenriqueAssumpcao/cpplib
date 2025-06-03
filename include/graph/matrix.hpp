@@ -3,9 +3,6 @@
 #ifndef GRAPH_MATRIX
 #define GRAPH_MATRIX
 
-#include <list>
-#include <vector>
-
 #include "common.hpp"
 
 graph adj_list(const bmatrix &A);
