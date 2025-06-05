@@ -1,25 +1,23 @@
 #include "graph/mst.hpp"
 
-ll mst_prim(const int s,const int n,const wgraph &g, std::vector<int> &pred){
+ll mst_prim(const int n,const wgraph &g, std::vector<int> &pred){
     std::vector<ll> key(n,LLINF);
     std::vector<bool> visited(n,0);
     pred = std::vector<int>(n,-1);
-    key[s] = 0;
+    key[0] = 0;
 
     std::priority_queue<std::pair<ll,int>> pq;
-    pq.emplace(0,s);
+    pq.emplace(0,0);
 
     while(pq.size()){
         auto [neg_key,u] = pq.top();
         pq.pop();
         visited[u] = 1;
-        if(key[u] >= -neg_key){
-            for(auto [v,w] : g[u]){
-                if(visited[v] == 0 && w < key[v]){
-                    pred[v] = u;
-                    key[v] = w;
-                    pq.emplace(-w,v);
-                }
+        for(auto [v,w] : g[u]){
+            if(visited[v] == 0 && w < key[v]){
+                pred[v] = u;
+                key[v] = w;
+                pq.emplace(-w,v);
             }
         }
     }

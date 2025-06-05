@@ -2,7 +2,6 @@
 
 
 llmatrix floyd_warshall(const graph &G){
-    // Initialize distance matrix as weight matrix
     llmatrix D(G.size(),std::vector<ll>(G.size(),LLINF));
  
     for(unsigned u = 0; u < G.size();u++){
@@ -12,7 +11,6 @@ llmatrix floyd_warshall(const graph &G){
         }
     }
 
-    // Main loop
     for(unsigned k = 0; k < G.size(); k++){
         for(unsigned i = 0; i < G.size(); i++){
             for(unsigned j = 0; j < G.size(); j++){
@@ -28,7 +26,6 @@ llmatrix floyd_warshall(const graph &G){
 
 
 llmatrix floyd_warshall(const wgraph &G){
-    // Initialize distance matrix as weight matrix
     llmatrix D(G.size(),std::vector<ll>(G.size(),LLINF));
  
     for(unsigned u = 0; u < G.size();u++){
@@ -37,8 +34,7 @@ llmatrix floyd_warshall(const wgraph &G){
             D[u][v] = w;
         }
     }
-
-    // Main loop
+    
     for(unsigned k = 0; k < G.size(); k++){
         for(unsigned i = 0; i < G.size(); i++){
             for(unsigned j = 0; j < G.size(); j++){

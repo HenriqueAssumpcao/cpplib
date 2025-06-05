@@ -57,7 +57,6 @@ struct wedge {
  * with minimum weight to add to the growing MST. The graph is represented as
  * an adjacency list.
  *
- * @param s     Starting vertex for the MST (0-based index)
  * @param n     Total number of vertices in the graph
  * @param g     Weighted graph represented as an adjacency list where g[u] contains
  *              pairs of (v, w) indicating an edge from u to v with weight w
@@ -75,12 +74,12 @@ struct wedge {
  * @code
  *   wgraph g = {{{1, 4}, {2, 3}}, {{0, 4}, {2, 1}}, {{0, 3}, {1, 1}}};
  *   vector<int> pred;
- *   ll total_weight = mst_prim(0, 3, g, pred);
+ *   ll total_weight = mst_prim(3, g, pred);
  *   // pred will contain MST parent pointers
  *   // total_weight will be 4 (0-2 and 1-2)
  * @endcode
  */
-ll mst_prim(const int s,const int n,const wgraph &g, std::vector<int> &pred);
+ll mst_prim(const int n,const wgraph &g, std::vector<int> &pred);
 
 /**
  * Computes the Minimum Spanning Tree (MST) of a graph using Kruskal's algorithm.

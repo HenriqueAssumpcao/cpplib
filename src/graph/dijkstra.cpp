@@ -2,7 +2,6 @@
 
 
 void dijkstra(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int> &pred){
-    // Initializes distance and predecessor vectors
     dist.resize(G.size());pred.resize(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = LLINF;
@@ -10,8 +9,7 @@ void dijkstra(const wgraph &G, const int s,std::vector<ll> &dist,std::vector<int
     }
     dist[s] = 0;
 
-    // Creates a priority queue ordered w.r.t. the weighted distance between vertices
-    std::priority_queue<std::pair<ll,unsigned>> pq; // each element of the priority queue is a pair (d,v), where d is the distance from s to v
+    std::priority_queue<std::pair<ll,unsigned>> pq;
     pq.emplace(0,s);
 
     while(pq.size()){
