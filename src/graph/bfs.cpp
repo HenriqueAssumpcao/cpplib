@@ -1,11 +1,6 @@
 #include "graph/search.hpp"
 
-/*
-BFS search w.r.t. to a fixed node s on input graph G. dist is a vector of distances (ignoring weights), and pred is a vector of predecessors.
-Expects both dist and pred arrays to have size equal to the number of nodes.
-*/
 void bfs(const graph &G, const unsigned s,std::vector<ll> &dist,std::vector<int> &pred){
-    // Initializes the distance,predecessor and color vectors
     std::vector<int> color(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = LLINF;
@@ -15,11 +10,9 @@ void bfs(const graph &G, const unsigned s,std::vector<ll> &dist,std::vector<int>
     dist[s] = 0;
     color[s] = 1;
     
-    // Queue
     std::queue<unsigned> q;
     q.push(s);
 
-    // Main loop: for each neighbor of current queue front, explore it if its color is 0
     unsigned u;
     while(q.size()){
         u = q.front();
@@ -35,12 +28,8 @@ void bfs(const graph &G, const unsigned s,std::vector<ll> &dist,std::vector<int>
     }
 }
 
-/*
-BFS search w.r.t. to a fixed node s on input graph G. dist is a vector of distances (ignoring weights), and pred is a vector of predecessors.
-Expects both dist and pred arrays to have size equal to the number of nodes.
-*/
+
 void bfs(const wgraph &G, const unsigned s,std::vector<ll> &dist,std::vector<int> &pred){
-    // Initializes the distance,predecessor and color vectors
     std::vector<unsigned> color(G.size());
     for(unsigned i = 0; i < dist.size(); i++){
         dist[i] = LLINF;
@@ -50,11 +39,9 @@ void bfs(const wgraph &G, const unsigned s,std::vector<ll> &dist,std::vector<int
     dist[s] = 0;
     color[s] = 1;
     
-    // Queue
     std::queue<unsigned> q;
     q.push(s);
 
-    // Main loop: for each neighbor of current queue front, explore it if its color is 0
     unsigned u;
     while(q.size()){
         u = q.front();
