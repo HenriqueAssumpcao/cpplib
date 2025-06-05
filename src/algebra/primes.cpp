@@ -1,48 +1,76 @@
-#include <vector>
-#include <cmath>
-
-#include "common.hpp"
 #include "algebra/primes.hpp"
 
-std::vector<ll> eratosthenes_sieve(ll n){
-    std::vector<bool> is_prime(n-1,1);
-    std::vector<ll> primes;
+std::vector<bool> prime;
+std::vector<ll> factor,pexp,var,primes;
 
-    for(ll i = 2; i*i < n; i++){
-        if(is_prime[i-2] == 1){
-            ll j = i*i;
-            while(j <= n){
-                is_prime[j-2] = 0;
-                j += i;
+void eratosthenes_sieve(ll n){
+    prime = std::vector<bool>(n+1,1);
+    prime[0] = 0;
+    prime[1] = 0;
+
+    factor.resize(n+1);pexp.resize(n+1);var.resize(n+1);
+    primes.resize(0);
+
+    for(ll i = 2; i <= n; i++){
+        if(prime[i]){
+            factor[i] = i;
+            pexp[i] = 1;
+            var[i] = 1;
+            for(ll j = 2*i;j <= n; j += i){
+                prime[j] = 0;
+                factor[j] = i;
+                if(factor[j/i] == i){
+                    pexp[j] = pexp[j/i] + 1;
+                    var[j] = var[j/i];
+                }
+                else{
+                    pexp[j] = 1;
+                    var[j] = j/i;
+                }
+            }
+            primes.push_back(i);
+        }
+    }
+}
+
+bool prime_factors(ll n, ll NMAX,std::vector<ll> &p, std::vector<ll> &e){
+    if(n <= 1){
+        return (n == 1);
+    }
+    
+    p.resize(0);e.resize(0);
+    ll temp = n;
+    if(NMAX * NMAX < n){
+        return 0;
+    }
+
+    if(n > NMAX){
+        for(int pp : primes){
+            int curr = 0;
+            while((temp % pp) == 0){
+                curr++;
+                temp /= pp;
+            }
+            if(curr){
+                p.push_back(pp);
+                e.push_back(curr);
+            }
+            if(temp <= NMAX){
+                break;
             }
         }
     }
-
-    for(ll i = 0; i < n-1; i++){
-        if(is_prime[i] == 1){
-            primes.push_back(i+2);
+    if(temp <= NMAX){
+        while(temp != 1){
+            p.push_back(factor[temp]);
+            e.push_back(pexp[temp]);
+            temp = var[temp];
         }
     }
-
-    return primes;
-}
-
-
-std::vector<ll> prime_factors(ll n){
-    ll csqrtn = ceil(sqrt(n));
-    std::vector<ll> primes = eratosthenes_sieve(csqrtn);
-    std::vector<ll> factors;
-
-    ll temp = n;
-    for(ll prime : primes){
-        while(temp % prime == 0){
-            factors.push_back(prime);
-            temp /= prime;
-        }
-    }
-    if(temp > 2){
-        factors.push_back(temp);
+    else{
+        p.push_back(temp);
+        e.push_back(1);
     }
 
-    return factors;
+    return 1;
 }
