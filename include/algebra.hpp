@@ -5,6 +5,7 @@
 
 #include "algebra/basics.hpp"
 #include "algebra/primes.hpp"
+#include "algebra/rational.hpp"
 
 
 #endif // ALGEBRA
