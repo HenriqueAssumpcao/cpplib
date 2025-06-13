@@ -30,13 +30,13 @@ ll fast_exp_mod(ll e,const ll &b,const ll &mod){
 }
 
 // Finds integers x,y such that x*a + y*b = gcd(a,b) using euclid's extended algorithm
-ll gcd(ll a, ll b, ll &x, ll &y){
+ll gcd_ext(ll a, ll b, ll &x, ll &y){
     if(b == 0){
         x = 1;
         y = 0;
         return a;
     }
-    ll ret = gcd(b,a%b,x,y);
+    ll ret = gcd_ext(b,a%b,x,y);
     ll temp = y;
     y = x - (a/b)*temp;
     x = temp;
@@ -46,12 +46,12 @@ ll gcd(ll a, ll b, ll &x, ll &y){
 // Inverse of a in Z_n, returns 0 if doesnt exist
 ll inv_mod(const ll &a, const ll &n){
     ll x,y,d;
-    d = gcd(a,n,x,y);
+    d = gcd_ext(a,n,x,y);
     if(d == 1){
         if(x < 0){
             x = n - ((-x) % n);
         }
-        return (a*x)%n;
+        return x%n;
     }
     else{
         return 0;
