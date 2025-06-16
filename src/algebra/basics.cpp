@@ -73,7 +73,7 @@ llmatrix matmul_mod(const llmatrix &A,const llmatrix &B,const ll &mod){
         for(unsigned j = 0; j < B[0].size(); j++){
             C[i][j] = 0;
             for(unsigned k = 0; k < A[0].size();k++){
-                C[i][j] = (C[i][j] + (A[i][k]*B[k][j])) % mod;
+                C[i][j] = (C[i][j] + ((A[i][k]*B[k][j]) % mod)) % mod;
             }
         }
     }
