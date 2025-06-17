@@ -93,3 +93,28 @@ llmatrix fast_matexp_mod(ll e, const llmatrix &M,const ll &mod){
     }
     return temp;
 }
+
+// product of two permutations, i.e., first applying perm2 and then perm1
+std::vector<int> compose_permutation(int n,std::vector<int> &perm1, std::vector<int> &perm2){
+    std::vector<int> prod(n);
+    for(int i = 0; i < n; i++){
+        prod[i] = perm2[perm1[i]];
+    }
+    return prod;
+}
+
+// fast exponentiation of permutation
+std::vector<int> fast_exp_permute(int n, ll e, std::vector<int> &perm){
+    if(e == 1){
+        return perm;
+    }
+    else if(e == 2){
+        return compose_permutation(n,perm,perm);
+    }
+    std::vector<int> temp = fast_exp_permute(n,e/2,perm);
+    temp = compose_permutation(n,temp,temp);
+    if((e%2) == 1){
+        temp = compose_permutation(n,perm,temp);
+    }
+    return temp;
+}
