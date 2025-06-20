@@ -7,8 +7,6 @@
 #include <cassert>
 #include <numeric>
 
-
-
 struct rational{
     ll p,q;
     rational(ll _p = 0, ll _q = 1):p(_p),q(_q){

@@ -7,8 +7,8 @@
 #include "common.hpp"
 
 typedef std::complex<double> cd;
-const double pi = std::acos(-1);
 
 std::vector<cd> fft(int n, std::vector<cd> &coef, bool inverse_fft);
+std::vector<ll> convolution(std::vector<ll> &a, std::vector<ll> &b);
 
 #endif //FFT
