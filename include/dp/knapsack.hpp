@@ -3,8 +3,6 @@
 #ifndef KNAPSACK
 #define KNAPSACK
 
-#include <vector>
-
 #include "common.hpp"
 
 void knapsack_max(const int &n, const int &C,const std::vector<int> &weights,const std::vector<int> &values, intmatrix &dp, std::vector<int> &sol);
