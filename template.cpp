@@ -16,10 +16,17 @@ typedef vector<vector<ll>> llmatrix;
 
 template <typename T>
 void print_vector(vector<T> &vec){
-    for(unsigned i = 0; i < vec.size(); i++){
+    for(unsigned i = 0; i < vec.size()-1; i++){
         cout << vec[i] << " "; 
     }
-    cout << endl;
+    cout << vec[vec.size()-1] << endl;
+}
+
+template <typename T>
+void print_matrix(vector<vector<T>> &M){
+    for(unsigned i = 0; i < M.size(); i++){
+        print_vector<T>(M[i]);
+    }
 }
 
 int main(){
